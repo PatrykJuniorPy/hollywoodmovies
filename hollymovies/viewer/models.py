@@ -1,6 +1,18 @@
 from django.db import models
-
-# Create your models here.
+from django.db.models import (
+DO_NOTHING, CharField, DateField, DateTimeField, ForeignKey, IntegerField,
+Model, TextField
+)
 
 class Genre(models.Model):
     name = models.CharField(max_length=128)
+    
+
+
+class Movie(Model):
+  title = CharField(max_length=128)
+  genre = ForeignKey(Genre, on_delete=DO_NOTHING)
+  rating = IntegerField()
+  released = DateField()
+  description = TextField()
+  created = DateTimeField(auto_now_add=True)

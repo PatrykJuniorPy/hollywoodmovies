@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-# Create your views here.
-
-
-def hello(request):
-    s = request.GET.get('s', '')
-    return HttpResponse(f'<strong>Hello, {s} world!</strong>')
+def hello_view(request, s0):
+    s1 = request.GET.get('s1', '')
+    return render (
+        request,
+        template_name="hello.html",
+        context={'adjectives': [s0,s1, 'beatiful', 'wonderful']}
+    )

@@ -1,5 +1,9 @@
-<form action="create-genre" method="get">
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{% url 'new-genre' %}" method="get">
     <p>Add new movie category</p>
     <input type='text' name="new-name">
-    <input type="submit" value="dodaj fila">
+    <input type="submit" value="add new genre">
 </form> 
+{% endblock %}

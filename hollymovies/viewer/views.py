@@ -1,7 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from viewer.models import Movie, Genre
-from django.views.generic import ListView
+from django.views.generic import FormView, ListView
+from viewer.forms import MovieForm
+from logging import getLogger
+
+from django.urls import reverse_lazy
+from django.views.generic import FormView, ListView
+
+from viewer.forms import MovieForm
+from viewer.models import Movie
+
+LOGGER = getLogger()
 
 def hello_view(request, s0):
     s1 = request.GET.get('s1', '')
@@ -41,3 +51,26 @@ def create_genre(request):
     else:
         Genre.objects.create(name=new_genre_name)
         return HttpResponse(f"{new_genre_name} added to database!")
+    
+
+class MovieCreateView(FormView):
+    
+  template_name = 'forms.html'
+  form_class = MovieForm
+  success_url = reverse_lazy('movie_create')
+
+  def form_valid(self, form):
+    result = super().form_valid(form)
+    cleaned_data = form.cleaned_data
+    Movie.objects.create(
+      title=cleaned_data['title'],
+      genre=cleaned_data['genre'],
+      rating=cleaned_data['rating'],
+      released=cleaned_data['released'],
+        description=cleaned_data['description']
+    )
+    return result
+
+  def form_invalid(self, form):
+    LOGGER.warning('User provided invalid data.')
+    return super().form_invalid(form)

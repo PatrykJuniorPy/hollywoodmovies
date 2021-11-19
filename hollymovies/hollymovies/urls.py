@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from viewer.views import create_genre, hello_view, MoviesView, CreateGenre
+from viewer.views import MovieCreateView, create_genre, hello_view, MoviesView
 
 
 urlpatterns = [
@@ -24,5 +24,7 @@ urlpatterns = [
     path('', MoviesView.as_view(), name='index'),
     # path('/create-genre', CreateGenre.as_view(), name='genre'),
     path('create-genre/', create_genre, name="new-genre"),
+    path('movie/create', MovieCreateView.as_view(), name="movie_create"),
+    
     
 ]

@@ -20,7 +20,7 @@ from viewer.views import MovieCreateView, create_genre, hello_view, MoviesView
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='a'),
-    path('hello/<s0>', hello_view,),
+    # path('hello/<s0>', hello_view,),
     path('', MoviesView.as_view(), name='index'),
     # path('/create-genre', CreateGenre.as_view(), name='genre'),
     path('create-genre/', create_genre, name="new-genre"),

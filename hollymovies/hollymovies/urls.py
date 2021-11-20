@@ -15,16 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from viewer.views import MovieCreateView, create_genre, hello_view, MoviesView
+from viewer.views import Genre, Movie
+from viewer.views import MovieCreateView, create_genre, hello_view, MoviesView, MovieUpdateView, MovieDeleteView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='a'),
-    # path('hello/<s0>', hello_view,),
+    path('hello/<s0>', hello_view,),
     path('', MoviesView.as_view(), name='index'),
-    # path('/create-genre', CreateGenre.as_view(), name='genre'),
     path('create-genre/', create_genre, name="new-genre"),
     path('movie/create', MovieCreateView.as_view(), name="movie_create"),
+    path('movie/update/<pk>', MovieUpdateView.as_view(), name="movie_update"),
+    path('movie/delete/<pk>', MovieDeleteView.as_view(), name="movie_delete"),
+    
+    
     
     
 ]

@@ -1,15 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from viewer.models import Movie, Genre
-from django.views.generic import FormView, ListView
+from django.views.generic import FormView, ListView, UpdateView, DeleteView
 from viewer.forms import MovieForm
 from logging import getLogger
-
 from django.urls import reverse_lazy
-from django.views.generic import FormView, ListView
 
-from viewer.forms import MovieForm
-from viewer.models import Movie
 
 LOGGER = getLogger()
 
@@ -21,28 +17,16 @@ def hello_view(request, s0):
         context={'adjectives': [s0,s1, 'beatiful', 'wonderful']}
     )
 
-class CreateGenre(ListView):
-    template_name="create-genre.html"
-    model = Genre
-
-
 class MoviesView(ListView):
     template_name="movies.html"
     model = Movie
-    # def get(self, request):
-    #     return render(
-    #         request, 
-    #         template_name='movies.html',
-    #         context={"movies": Movie.objects.all()}
-    #     )
-
     
-# def movies(request):
-#     return render (
-#         request,
-#         template_name='movies.html',
-#         context={'movies': Movie.objects.all()}
-#     )
+def movies(request):
+    return render (
+        request,
+        template_name='movies.html',
+        context={'movies': Movie.objects.all()}
+    )
 
 def create_genre(request):
     new_genre_name= request.GET.get('new-name', None)
@@ -74,3 +58,19 @@ class MovieCreateView(FormView):
   def form_invalid(self, form):
     LOGGER.warning('User provided invalid data.')
     return super().form_invalid(form)
+
+class MovieUpdateView(UpdateView):
+    template_name='forms.html'
+    model=Movie
+    form_class=MovieForm
+    succes_url = reverse_lazy('index')
+    
+    def form_invalid(self, form):
+        LOGGER.warning('User provided invalid data while updating a movie.')
+        return super().form_invalid(form)
+
+
+class MovieDeleteView(DeleteView):
+    template_name = 'movie_confirm_delete.html'
+    model = Movie
+    success_url = reverse_lazy('index')

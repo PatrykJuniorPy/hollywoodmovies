@@ -7,6 +7,11 @@ from logging import getLogger
 from django.urls import reverse_lazy
 
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+
+
 LOGGER = getLogger()
 
 def hello_view(request, s0):
@@ -37,7 +42,7 @@ def create_genre(request):
         return HttpResponse(f"{new_genre_name} added to database!")
     
 
-class MovieCreateView(FormView):
+class MovieCreateView(LoginRequiredMixin, FormView):
     
   template_name = 'forms.html'
   form_class = MovieForm
@@ -59,7 +64,7 @@ class MovieCreateView(FormView):
     LOGGER.warning('User provided invalid data.')
     return super().form_invalid(form)
 
-class MovieUpdateView(UpdateView):
+class MovieUpdateView(LoginRequiredMixin, UpdateView):
     template_name='forms.html'
     model=Movie
     form_class=MovieForm
@@ -70,7 +75,7 @@ class MovieUpdateView(UpdateView):
         return super().form_invalid(form)
 
 
-class MovieDeleteView(DeleteView):
+class MovieDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'movie_confirm_delete.html'
     model = Movie
     success_url = reverse_lazy('index')

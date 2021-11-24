@@ -6,7 +6,7 @@ from django.views.generic import FormView, ListView, UpdateView, DeleteView
 from viewer.forms import MovieForm
 from logging import getLogger
 from django.urls import reverse_lazy
-
+from django.contrib.auth.views import LoginView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -81,3 +81,6 @@ class MovieDeleteView(LoginRequiredMixin, DeleteView):
     model = Movie
     success_url = reverse_lazy('index')
     
+
+class SubmitableLoginView(LoginView):
+    template_name = 'login_form.html'

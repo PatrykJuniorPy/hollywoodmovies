@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render
 from django.http import HttpResponse
 from viewer.models import Movie, Genre
@@ -79,3 +80,4 @@ class MovieDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'movie_confirm_delete.html'
     model = Movie
     success_url = reverse_lazy('index')
+    

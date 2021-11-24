@@ -8,6 +8,9 @@
         {% for movie in object_list %}
             <li>
             {{ movie.title }} ({{ movie.released.year }}) - {{ movie.genre.name }}
+             <a href="{% url 'movie_update' pk=movie.pk %}">Update</a>
+             <a href="{% url 'movie_delete' pk=movie.pk %}">Delete</a>
+
             </li>
         {% endfor %}
     </ul>

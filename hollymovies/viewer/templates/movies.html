@@ -1,17 +1,46 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load static %}
 
 {% block content %}
     <h1>Welcome to HollyMovies!</h1>
-    <br>
-    <strong>A List of Movies:</strong>
-    <ul>
-        {% for movie in object_list %}
-            <li>
-            {{ movie.title }} ({{ movie.released.year }}) - {{ movie.genre.name }}
-             <a href="{% url 'movie_update' pk=movie.pk %}">Update</a>
-             <a href="{% url 'movie_delete' pk=movie.pk %}">Delete</a>
 
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <a href="{% url 'movie_create' %}"class="btn btn-Success">Create Movie</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                List
+            </h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Released</th>
+                            <th scope="col">Genre</th>
+                            <th class="text-right" scope="col">Update</th>
+                            <th class="text-right" scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for movie in object_list %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ movie.title}}</td>
+                            <td>{{ movie.released.year}}</td>
+                            <td>{{ movie.genre.name}}</td>
+                            <td class="text-right"><a href="{% url 'movie_update' movie.id %} " class="btn btn-success btn-sm">Update</a></td>
+                            <td class="text-right"><a href="{% url 'movie_delete' movie.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr>
+    </div>
 {% endblock %}

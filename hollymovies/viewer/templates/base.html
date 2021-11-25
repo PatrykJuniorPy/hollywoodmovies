@@ -15,7 +15,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container fixed">
-        <a class="navbar-brand" href="{% url 'index' %}">HollyMovies</a>
+        <a class="navbar-brand" href="/">HollyMovies</a>
         <button
           class="navbar-toggler" type="button"
           data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -27,15 +27,9 @@
             <a class="nav-item nav-link active" href="{% url 'index' %}">
               Home
             </a>
-            <a class="nav-item nav-link active" href="/admin">
-              Admin Panel
-            </a>
-            <a class="nav-item nav-link active" href="{% url 'new-genre' %}">
-              Add Genre
-            </a>
-            <a class="nav-item nav-link active" href="{% url 'movie_create' %}">
-              Add a Movie
-            </a>
+            <a class="nav-item nav-link active" href="/admin">Panel</a>
+            <a class="nav-item nav-link active" href="{% url 'new-genre' %}">Genre</a>
+            <a class="nav-item nav-link active" href="{% url 'movie_create' %}">Movie</a>
           </div>
         </div>
       </nav>

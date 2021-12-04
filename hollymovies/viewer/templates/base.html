@@ -16,6 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container fixed">
         <a class="navbar-brand" href="/">HollyMovies</a>
+        
         <button
           class="navbar-toggler" type="button"
           data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -23,14 +24,15 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="{% url 'index' %}">
-              Home
-            </a>
+            <a class="nav-item nav-link active" href="{% url 'index' %}">Home</a>
             <a class="nav-item nav-link active" href="/admin">Panel</a>
             <a class="nav-item nav-link active" href="{% url 'new-genre' %}">Genre</a>
             <a class="nav-item nav-link active" href="{% url 'movie_create' %}">Movie</a>
+            
           </div>
+          <div><a class="navbar-brand" style="margin-left: 41rem" href="{% url 'login' %}">Login</a></div>
         </div>
       </nav>
     <div class="container">

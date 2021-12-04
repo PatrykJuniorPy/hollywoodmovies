@@ -84,3 +84,4 @@ class MovieDeleteView(LoginRequiredMixin, DeleteView):
 
 class SubmitableLoginView(LoginView):
     template_name = 'login_form.html'
+    
